@@ -1,0 +1,89 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{amsmath}
+\usepackage[total={17cm,25cm}, top=2.5cm, left=2cm, includefoot]{geometry}
+\usepackage{enumitem}
+
+\setlength{\itemindent}{0cm}
+\setlength{\parskip}{9pt}
+\setlength\parindent{0pt}
+
+\begin{document}
+  \section{P-I-4 Dva lupiči}
+  Pro zadání $(a)$, $(b)$ a $(c)$ jsou dány:
+  \begin{itemize}[noitemsep, topsep=0pt]
+    \item Posloupnost různých nenulových hodnot věcí $v=p_1, p_2,...p_n;n \in N, p_n \in R^+$.
+    \item Součet hodnot věcí $s=\sum\limits_{i=1}^n p_i$.
+    \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$, protože lépe než na dvě stejné poloviny lup rozdělit nejde.}).
+  \end{itemize}
+
+  \subsection{Zadání (a)}
+
+  Pro zadání $(a)$ dává ALG pro libovolný vstup $v$ všechen lup na první hromadu. Proto se největší hromada musí při každém vstupu rovnat součtu hodnot věcí $s$, protože na druhé hromadě nic není.
+
+  Pro optimální algoritmus s optimálním vstupem platí, že OPT$(v_{opt})=s/2$.
+  ALG$(v)=s$ pro libovolný vstup, takže musí rovněž platit, že ALG$(v_{opt})=s$. Úpravou získáme rovnost ALG$(v_{opt}) = 2 \cdot$OPT$(v_{opt})$.
+
+  OPT$(v_{opt})$ vždy produkuje nejmenší možný součet, takže OPT$(v_{opt}) \le$ OPT$(v)$. Úpravou získáváme:
+
+  \begin{center}
+    $2 \cdot$OPT$(v_{opt}) \le 2\cdot$OPT$(v)$
+
+    ALG$(v) \le 2 \cdot$OPT$(v)$
+  \end{center}
+
+  Z poslední úpravy je patrné, že výše popsaný algoritmus je 2-kompetitivní.
+
+  \subsection{Zadání (b)}
+  Mějme algoritmus ALG$(v)$, který věci dává na hromádky následovně:
+  \begin{itemize}[noitemsep, topsep=0pt]
+    \item Pokud hromady nejsou stejné, umístí prvek na menší hromádku.
+    \item Pokud hromádky stejné jsou, umístí prvek na první hromádku.
+  \end{itemize}
+
+  Pojďme si uvedený algoritmus rozebrat pro vstupy $v$ o různých délkách vstupu $n$.
+
+  \subsubsection{Řešení pro $n \le 2$}
+  Pokud platí, že $n \le 2$, tak se pro posloupnost $v=p_1,...,p_n$ algoritmus ALG$(v)$ chová stejně jako optimální algoritmus OPT$(v)$.
+  \newpage
+  \begin{equation*}
+      \text{OPT}(v)=\text{ALG}(v)= \begin{cases}
+        0 & n=0
+        \\
+        p_1 & n=1
+        \\
+        \text{MAX\footnotemark}(p_1, p_2) & n=2
+      \end{cases}
+  \end{equation*}
+  \footnotetext{Funkce MAX$(a, b)$ vrací větší ze dvou vstupních čísel.}
+
+  ALG$(v)$ první dva prvky umístí na dvě rozdílné hromádky. OPT$(v)$ dělá to samé, protože kdyby umístil dva prvky na stejnou hromádku, tak by se výsledek dal zlepšit tím, že by se jeden z nich přesunul na tu druhou.
+
+  \subsubsection{Řešení pro $n=3$}
+  Pojďme se soustředit na vstupy, pro které náš algoritmus produkuje nejhorší výsledky.
+
+  Místo toho, abychom se dívali na to, jaký výsledek ALG$(v)$ vyprodukuje, což nevýbá příliš informativní, dívejme se raději na poměr výsledku s celkovou sumou hodnot $s$ vstupu $v$.
+
+  % TOHLE BUDE POTŘEBA LÉPE OBHÁJIT
+  Jelikož náš algoritmus "hladově" přidává na tu z menších hromádek, nejhorší vstupy bude mít pro případy, kdy jsou hodnoty setřízené vzestupně.
+
+  Pojďme zkusit najít obecnou formu optimálních tříprvkových vstupů $v_{opt}$. Jelikož hodnoty lupu nemohou být stejné a řešíme vstupy, které jsou vzestupné, druhý prvek musí být ve formě $p_2=p_1+a; a \in R^+$. Aby byl vstup optimální, musí se třetí prvek rovnat součtu prvních dvou prvků (aby se obě hromady rovnaly): $p_3=p_1+p_2=2p_1+a; a \in R^+$. Obecná forma je tedy:
+  \begin{center}
+    $v_{opt}=p_1, p_1+a, 2p_1 + a; a \in R^+$
+  \end{center}
+
+  \subsection{Zadání (c)}
+  Uvažujme libovolný algoritmus ALG, pro který zkonstruujeme vstup následujícím způsobem:
+  \begin{center}
+    $p_1=1, p_2=1+a,..., p_n=\sum\limits_{i=1}^{n-1} p_i; n \in N, a \in R^+$
+  \end{center}
+  Prvních několik prvků posloupnosti je tedy $1, 1+a, 2+a, 4+2a, 8+4a, 16+8a$).
+
+  Pro tento vstup platí, že OPT$(v)=s/2$, protože díky znalosti celého vstupu optimální algoritmus ví, že součet prvních $n-1$ prvků je roven $n$-tému prvku.
+
+  % Dokázat, jaký by ten výsledek byl
+  Uvažovaný ALG však vstup dopředu nevidí, proto vždy musí umísťovat prvky do té menší z hromádek. Pokud by tak neučinil, zkonstruovali bychom nový vstup o takové délce, aby se ALG zastavil v tom bodě, ve kterém prvek do menší z hromádek neumístil.
+
+  % Dokázat, jaké jsou stavy těch věcí na hromádkách pro tu posloupnost (sudé, liché...)
+
+\end{document}
