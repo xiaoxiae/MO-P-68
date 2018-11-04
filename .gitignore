@@ -1,0 +1,11 @@
+## Tex file outputs
+*.aux
+*.fdb_latexmk
+*.fls
+*.gz
+*.log
+*.pdf
+*.synctex.gz
+
+## Include Zadání.pdf
+!Zadání.pdf  
