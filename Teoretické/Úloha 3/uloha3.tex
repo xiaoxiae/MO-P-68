@@ -1,9 +1,10 @@
 \documentclass[a4paper, 12pt]{article}
 
-\usepackage{amsmath}  % Math
+\usepackage{amsmath}
 \usepackage[total={17cm,25cm}, top=2.5cm, left=2cm, includefoot]{geometry}
-\usepackage{enumitem} % Lists
-\usepackage[T1]{fontenc}  % Formating czech symbols
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[bottom]{footmisc}
 
 \setlist[itemize]{topsep=0pt}
 \setlength{\itemindent}{0cm}
@@ -12,7 +13,7 @@
 
 \begin{document}
   \section{P-I-3 Zahrádka}
-  
+
   \subsection{Řešení pro $n\le100$}
   Pro každý bod lze projít všechny ostatní body, čímž vyčteme všechny možné dvojice bodů. Pro každou tuto dvojici lze opět vyčíst všechny ostatní body a pro každou takto vzniklou trojici vypočítat obsah trojúhelníku, který tvoří.
 
@@ -24,16 +25,11 @@
 
   Vektorový součin je však aplikovatelný pouze na body o třech souřadnicích, proto musíme k bodům přirat třetí souřadnici s nulovou hodnotou:
 
-  \begin{equation*}
-    S=\frac{| [x_1,y_1,0]\times[x_2,y_2,0] |}{2}
-    =\frac{| [y_1 \cdot 0 - 0 \cdot y_2, 0 \cdot x_2 - x_1 \cdot 0, x_1 \cdot y_2 - y_1 \cdot x_2] |}{2}
-  \end{equation*}
-
-  Po úpravě a výpočtu délky vektoru nám vyjde:
-
-  \begin{equation*}
-    S=\frac{| x_1 \cdot y_2 - y_1 \cdot x_2 |}{2}
-  \end{equation*}
+  $$
+  S=\frac{| [x_1,y_1,0]\times[x_2,y_2,0] |}{2}
+  =\frac{| [y_1 \cdot 0 - 0 \cdot y_2, 0 \cdot x_2 - x_1 \cdot 0, x_1 \cdot y_2 - y_1 \cdot x_2] |}{2}
+  =\frac{| x_1 \cdot y_2 - y_1 \cdot x_2 |}{2}
+  $$
 
   Nejmenší z takto vytvořených trojúhelníků je řešením našeho problému. Časová složitost výše popsaného algoritmu je $O(n^3)$, protože procházíme všechny trojice z dané množiny bodů.
 
