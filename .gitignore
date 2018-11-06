@@ -6,6 +6,8 @@
 *.log
 *.pdf
 *.synctex.gz
+*.bbl
+*.blg
 
 ## Include Zadání.pdf
 !Zadání.pdf  
