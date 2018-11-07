@@ -13,11 +13,12 @@
 
 \begin{document}
   \section{P-I-4 Dva lupiči}
-  Nechť jsou pro řešení zadání $(a)$, $(b)$ a $(c)$ dány následující pojmy:
+  Nechť jsou pro řešení zadání $(a)$, $(b)$ a $(c)$ dány:
   \begin{itemize}[noitemsep]
-    \item Vstup $v$ jako posloupnost různých hodnot věcí $v=p_1, p_2,...p_n;n \in N, p \in R^+$.
+    \item Vstup $v$ jako posloupnost různých hodnot věcí $v=p_1, p_2,...p_n; n \in N$.
     \item Součet hodnot věcí $s=\sum\limits_{i=1}^n p_i$ pro daný vstup o velikosti $n$.
-    \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$.}).
+    \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$ (lépe než na dvě poloviny věci rozdělit nejde).}).
+    \item Polovina rozdílu velikostí hromádek $r$.
   \end{itemize}
 
   \subsection{Řešení zadání $(a)$}
@@ -35,47 +36,46 @@
 
   \subsection{Řešení zadání $(b)$}
   Mějme algoritmus ALG$(v)$, který věci dává na hromádky následovně:
-  \begin{itemize}[noitemsep, topsep=0pt]
+  \begin{itemize}
     \item Pokud hromady nejsou stejné, umístí prvek na hromádku s menší hodnotou.
     \item Pokud hromádky stejné jsou, umístí prvek na libovolnou z obou hromádek.
   \end{itemize}
 
-  \iffalse
-  Pojďme si uvedený algoritmus rozebrat pro vstupy $v$ o různých délkách vstupu $n$.
+  \subsubsection{Důkaz 3/2 kompetitivnosti}
+  Pro výstup algoritmu OPT pro libovolný vstup $v$ platí:
+  \begin{itemize}
+    \item OPT$(v) \ge s/2$ (viz. úloha $(a)$).
+    \item OPT$(v) \ge p \; \forall \; p \in v$ (je zřejmé, že OPT nemůže nikdy vyprodukovat nic menšího než hodnotu největšího prvku vstupu).
+  \end{itemize}
 
-  \subsubsection{Řešení pro $n \le 2$}
-  Pokud platí, že $n \le 2$, tak se pro posloupnost $v=p_1,...,p_n$ algoritmus ALG$(v)$ chová stejně jako optimální algoritmus OPT$(v)$:
-  \newpage
-  \begin{equation*}
-      \text{OPT}(v)=\text{ALG}(v)= \begin{cases}
-        0 & n=0
-        \\
-        p_1 & n=1
-        \\
-        \text{MAX\footnotemark}(p_1, p_2) & n=2
-      \end{cases}
-  \end{equation*}
-  \footnotetext{Funkce MAX$(a, b)$ vrací větší ze dvou vstupních čísel.}
+  Pro výstup algoritmu ALG pro libovolný vstup $v$ platí:
+  \begin{itemize}
+    \item Pokud se před přidáním posledního prvku hromádky rovnají, tak pro poslední prvek posloupnosti musí platit, že $p_n=2r$ (je dvojnásobek poloviny rozdílu hromádek). Pokud se nerovnají, tak je $p_n$ nutně větší než rozdíl hromádek: $p_n \ge 2r$.
+    \item ALG$(v)=r+\frac{s}{2}$ (vždy produkuje polovinu celkového součtu plus polovinu rozdílu hromádek).
+  \end{itemize}
 
-  ALG první dva prvky umístí na dvě rozdílné hromádky. OPT se vždy chová stejně nebo lépe než ALG, takže mu v tomto případě nezbývá nic jiného, než dělat to samé.
-  \fi
+  OPT$(v) \ge p \; \forall \; p \in v$, takže musí platit i pro $p_n$. Dosazením do nerovnosti dostáváme:
+
+  $$\text{ALG}(v)=r+\frac{s}{2}$$
+  $$\text{ALG}(v) \le \frac{\text{OPT}(v)}{2}+\text{OPT}(v)$$
+  $$\text{ALG}(v) \le \frac{3}{2}\text{OPT}(v)$$
+
+  Kompetitivnost výše popsaného algoritmu je tedy $3/2$.
 
   \subsection{Řešení zadání $(c)$}
   Uvažujme vstup $v_{opt}=1,1+a,2+a; a \in R^+$ (je $opt$, protože součet prvních dvou se rovná tomu třetímu), jeho součet $s=4+2a; a \in R^+$ a libovolný on-line algoritmus ALG.
 
-  Pro optimální algoritmus platí, že OPT$(v_{opt})=s/2$ (vidí, že si musí nechat místo na třetí prvek v jedné z hromádek).
+  Pro optimální algoritmus platí, že OPT$(v_{opt})=s/2$ (vidí celý vstup).
 
   ALG však dopředu nevidí, že vstup takto vypadá, proto musí (mimo první prvek, který dá na libovolnou hromádku) umisťovat prvky vždy na hromádku s menší hodnotou. Pokud by dva po sobě jdoucí prvky umístil na stejnou hromádku, vstup bychom zkrátili tak, aby se ALG zastavil právě v tomto bodě.
 
-  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3,
+  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3, pro který by ALG v poměru s OPT vyšel $\frac{3+2a}{2+a}$, což by se přibližovalo ke $3/2$.
 
-  Pro námi uvažovaný vstup tedy musí platit $ALG(v_{opt})=3+a$ (1. a 3. prvek). Pro $a$ přibližující-se k nule vychází (v poměru s výsledkem optimálního algoritmu OPT) hodnoty:
+  Pro námi uvažovaný vstup tedy musí platit ALG$(v_{opt})=3+a$ (1. a 3. prvek). Pro $a$ přibližující-se k nule vychází (v poměru s výsledkem optimálního algoritmu OPT) hodnoty:
 
   $$\lim_{a\to0} \frac{\text{ALG}(v_{opt})}{\text{OPT}(v_{opt})}
   =\lim_{a\to0} \frac{3+a}{2+a}
   =\frac{3}{2}$$
 
   Z tohoto výsledku je patrné, že každý on-line algoritmus lze "donutit" do výsledku, který je v poměru s optimálním výsledkem roven hodnotě $3/2$.
-
-  Proto platí, že: $$\text{ALG}(v) \le \frac{3}{2}\text{OPT}(v)$$
 \end{document}
