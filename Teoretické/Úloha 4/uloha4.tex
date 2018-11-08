@@ -11,7 +11,24 @@
 \setlength{\parskip}{9pt}
 \setlength\parindent{0pt}
 
+\title{P-I-4 Dva lupiči}
+\author{Tomáš Sláma}
+\date{}
+
 \begin{document}
+  \maketitle
+
+  \bigskip
+  \begin{center}
+    \textsc{Vrát 19, Železný Brod, 468 22}
+
+    \textsc{Počet stran řešení: 2}
+  \end{center}
+
+  \pagenumbering{gobble}
+  \newpage
+  \pagenumbering{arabic}
+
   \section{P-I-4 Dva lupiči}
   Nechť jsou pro řešení zadání $(a)$, $(b)$ a $(c)$ dány:
   \begin{itemize}[noitemsep]
@@ -27,9 +44,9 @@
   Pro optimální algoritmus s optimálním vstupem platí, že OPT$(v_{opt})=s/2$.
   ALG$(v)=s$ pro libovolný vstup, takže musí rovněž platit, že ALG$(v_{opt})=s$. Úpravou získáme rovnost ALG$(v_{opt}) = 2 \cdot$OPT$(v_{opt})$.
 
-  OPT$(v_{opt})$ vždy produkuje optimální výstup, takže platí nerovnost OPT$(v_{opt}) \le$ OPT$(v)$. Úpravou nerovnosti získáváme:
+  OPT$(v_{opt})$ vždy produkuje optimální výstup, takže platí nerovnost $s/2 \le$ OPT$(v)$. Úpravou nerovnosti získáváme:
 
-  $$2 \cdot\text{OPT}(v_{opt}) \le 2\cdot\text{OPT}(v)$$
+  $$s \le 2\cdot\text{OPT}(v)$$
   $$\text{ALG}(v) \le 2 \cdot\text{OPT}(v)$$
 
   Z poslední úpravy je patrné, že výše popsaný algoritmus je 2-kompetitivní.
@@ -54,7 +71,7 @@
     \item ALG$(v)=r+\frac{s}{2}$ (vždy produkuje polovinu celkového součtu plus polovinu rozdílu hromádek).
   \end{itemize}
 
-  OPT$(v) \ge p \; \forall \; p \in v$, takže musí platit i pro $p_n$. Dosazením do nerovnosti dostáváme:
+  OPT$(v) \ge p \; \forall \; p \in v$, což musí platit i pro $p_n$. Dosazením do nerovnosti dostáváme:
 
   $$\text{ALG}(v)=r+\frac{s}{2}$$
   $$\text{ALG}(v) \le \frac{\text{OPT}(v)}{2}+\text{OPT}(v)$$
@@ -65,17 +82,17 @@
   \subsection{Řešení zadání $(c)$}
   Uvažujme vstup $v_{opt}=1,1+a,2+a; a \in R^+$ (je $opt$, protože součet prvních dvou se rovná tomu třetímu), jeho součet $s=4+2a; a \in R^+$ a libovolný on-line algoritmus ALG.
 
-  Pro optimální algoritmus platí, že OPT$(v_{opt})=s/2$ (vidí celý vstup).
+  Pro optimální algoritmus s námi zkonstruovaným vstupem platí, že OPT$(v_{opt})=s/2$ (vidí celý vstup).
 
   ALG však dopředu nevidí, že vstup takto vypadá, proto musí (mimo první prvek, který dá na libovolnou hromádku) umisťovat prvky vždy na hromádku s menší hodnotou. Pokud by dva po sobě jdoucí prvky umístil na stejnou hromádku, vstup bychom zkrátili tak, aby se ALG zastavil právě v tomto bodě.
 
-  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3, pro který by ALG v poměru s OPT vyšel $\frac{3+2a}{2+a}$, což by se přibližovalo ke $3/2$.
+  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom pro libovolné $a$ přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3, pro který by ALG v poměru s OPT vyšel $\frac{3+2a}{2+a}$, což by se pro $a$ blížící se nule přibližovalo ke $3/2$.
 
-  Pro námi uvažovaný vstup tedy musí platit ALG$(v_{opt})=3+a$ (1. a 3. prvek). Pro $a$ přibližující-se k nule vychází (v poměru s výsledkem optimálního algoritmu OPT) hodnoty:
+  Pokud námi uvažovaný vstup bude dávat prvky vždy na tu menší hromádku, musí platit, že ALG$(v_{opt})=3+a$ (1. a 3. prvek). Pro $a$ přibližující-se k nule vychází (v poměru s výsledkem optimálního algoritmu OPT) hodnoty:
 
   $$\lim_{a\to0} \frac{\text{ALG}(v_{opt})}{\text{OPT}(v_{opt})}
   =\lim_{a\to0} \frac{3+a}{2+a}
   =\frac{3}{2}$$
 
-  Z tohoto výsledku je patrné, že každý on-line algoritmus lze "donutit" do výsledku, který je v poměru s optimálním výsledkem roven hodnotě $3/2$.
+  Z tohoto výsledku je patrné, že každý on-line algoritmus lze pro vstup hotoho formátu "donutit" do výsledku, který je v poměru s optimálním výsledkem roven hodnotě $3/2$.
 \end{document}
