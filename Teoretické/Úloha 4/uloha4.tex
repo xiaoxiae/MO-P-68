@@ -29,64 +29,60 @@
   \newpage
   \pagenumbering{arabic}
 
-  \section{P-I-4 Dva lupiči}
   Nechť jsou pro řešení zadání $(a)$, $(b)$ a $(c)$ dány:
-  \begin{itemize}[noitemsep]
+  \begin{itemize}
     \item Vstup $v$ jako posloupnost různých hodnot věcí $v=p_1, p_2,...p_n; n \in N$.
     \item Součet hodnot věcí $s=\sum\limits_{i=1}^n p_i$ pro daný vstup o velikosti $n$.
-    \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$ (lépe než na dvě poloviny věci rozdělit nejde).}).
+    \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$, protože rovnoměrněji než na dvě poloviny nic rozdělit nejde).}).
     \item Polovina rozdílu velikostí hromádek $r$.
   \end{itemize}
 
-  \subsection{Řešení zadání $(a)$}
-  Pro zadání $(a)$ dává ALG pro libovolný vstup $v$ všechen lup na první hromadu. Proto se hromada s větší hodnotou musí při každém vstupu rovnat součtu hodnot věcí $s$ (na druhé hromadě nic není).
+  \section{Řešení zadání $(a)$}
+  Pro zadání $(a)$ dává ALG pro libovolný vstup $v$ všechen lup na první hromadu. Proto se hromada s větší hodnotou musí při každém vstupu rovnat součtu hodnot věcí $s$ (na druhé hromadě nic není)... ALG$(v)=s$.
 
-  Pro optimální algoritmus s optimálním vstupem platí, že OPT$(v_{opt})=s/2$.
-  ALG$(v)=s$ pro libovolný vstup, takže musí rovněž platit, že ALG$(v_{opt})=s$. Úpravou získáme rovnost ALG$(v_{opt}) = 2 \cdot$OPT$(v_{opt})$.
-
-  OPT$(v_{opt})$ vždy produkuje optimální výstup, takže platí nerovnost $s/2 \le$ OPT$(v)$. Úpravou nerovnosti získáváme:
+  OPT$(v_{opt})$ vždy produkuje optimální výstup, takže musí platit nerovnost $s/2 \le$ OPT$(v)$. Úpravou nerovnosti získáváme:
 
   $$s \le 2\cdot\text{OPT}(v)$$
   $$\text{ALG}(v) \le 2 \cdot\text{OPT}(v)$$
 
   Z poslední úpravy je patrné, že výše popsaný algoritmus je 2-kompetitivní.
 
-  \subsection{Řešení zadání $(b)$}
+  \section{Řešení zadání $(b)$}
   Mějme algoritmus ALG$(v)$, který věci dává na hromádky následovně:
   \begin{itemize}
     \item Pokud hromady nejsou stejné, umístí prvek na hromádku s menší hodnotou.
     \item Pokud hromádky stejné jsou, umístí prvek na libovolnou z obou hromádek.
   \end{itemize}
 
-  \subsubsection{Důkaz 3/2 kompetitivnosti}
-  Pro výstup algoritmu OPT pro libovolný vstup $v$ platí:
+  \subsection{Důkaz 3/2 kompetitivnosti}
+  Pro algoritmus OPT s libovolným vstupem $v$ platí:
   \begin{itemize}
     \item OPT$(v) \ge s/2$ (viz. úloha $(a)$).
     \item OPT$(v) \ge p \; \forall \; p \in v$ (je zřejmé, že OPT nemůže nikdy vyprodukovat nic menšího než hodnotu největšího prvku vstupu).
   \end{itemize}
 
-  Pro výstup algoritmu ALG pro libovolný vstup $v$ platí:
+  Pro algoritmus ALG s libovolným vstupem $v$ platí:
   \begin{itemize}
-    \item Pokud se před přidáním posledního prvku hromádky rovnají, tak pro poslední prvek posloupnosti musí platit, že $p_n=2r$ (je dvojnásobek poloviny rozdílu hromádek). Pokud se nerovnají, tak je $p_n$ nutně větší než rozdíl hromádek: $p_n \ge 2r$.
+    \item Pokud se před přidáním posledního prvku hromádky rovnají, tak pro poslední prvek posloupnosti platí $p_n=2r$ (je dvojnásobek poloviny rozdílu hromádek). Pokud se nerovnají, tak je $p_n$ nutně větší než rozdíl hromádek: $p_n \ge 2r$.
     \item ALG$(v)=r+\frac{s}{2}$ (vždy produkuje polovinu celkového součtu plus polovinu rozdílu hromádek).
   \end{itemize}
 
   OPT$(v) \ge p \; \forall \; p \in v$, což musí platit i pro $p_n$. Dosazením do nerovnosti dostáváme:
 
-  $$\text{ALG}(v)=r+\frac{s}{2}$$
-  $$\text{ALG}(v) \le \frac{\text{OPT}(v)}{2}+\text{OPT}(v)$$
+  $$\text{ALG}(v)=r+\frac{s}{2} \qquad \qquad 2r \le \text{OPT}(v) \qquad \qquad \frac{s}{2} \le \text{OPT}(v)$$
+  $$\text{ALG}(v)=r+\frac{s}{2} \le \frac{\text{OPT}(v)}{2}+\text{OPT}(v)$$
   $$\text{ALG}(v) \le \frac{3}{2}\text{OPT}(v)$$
 
-  Kompetitivnost výše popsaného algoritmu je tedy $3/2$.
+  Výše popsaný algoritmus je tedy $3/2$-kompetitivní.
 
-  \subsection{Řešení zadání $(c)$}
+  \section{Řešení zadání $(c)$}
   Uvažujme vstup $v_{opt}=1,1+a,2+a; a \in R^+$ (je $opt$, protože součet prvních dvou se rovná tomu třetímu), jeho součet $s=4+2a; a \in R^+$ a libovolný on-line algoritmus ALG.
 
-  Pro optimální algoritmus s námi zkonstruovaným vstupem platí, že OPT$(v_{opt})=s/2$ (vidí celý vstup).
+  Pro optimální algoritmus s námi zkonstruovaným vstupem $v_n$ platí, že OPT$(v_{opt})=s/2$.
 
   ALG však dopředu nevidí, že vstup takto vypadá, proto musí (mimo první prvek, který dá na libovolnou hromádku) umisťovat prvky vždy na hromádku s menší hodnotou. Pokud by dva po sobě jdoucí prvky umístil na stejnou hromádku, vstup bychom zkrátili tak, aby se ALG zastavil právě v tomto bodě.
 
-  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom pro libovolné $a$ přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3, pro který by ALG v poměru s OPT vyšel $\frac{3+2a}{2+a}$, což by se pro $a$ blížící se nule přibližovalo ke $3/2$.
+  Pro náš vstup by se to mohlo stát mezi 1. a 2. prvky, kdy by tedy nejmenší ALG v poměru s OPT vyšel $\frac{2+a}{1+a}$ čímž bychom pro libovolné $a$ přesáhli hranici $3/2$. Další případ by mohl nastat mezi prvky č. 2 a 3, pro který by ALG v poměru s OPT vyšel $\frac{3+2a}{2+a}$, což by pro libovolné a překročilo hranici $3/2$.
 
   Pokud námi uvažovaný vstup bude dávat prvky vždy na tu menší hromádku, musí platit, že ALG$(v_{opt})=3+a$ (1. a 3. prvek). Pro $a$ přibližující-se k nule vychází (v poměru s výsledkem optimálního algoritmu OPT) hodnoty:
 
@@ -94,5 +90,7 @@
   =\lim_{a\to0} \frac{3+a}{2+a}
   =\frac{3}{2}$$
 
-  Z tohoto výsledku je patrné, že každý on-line algoritmus lze pro vstup hotoho formátu "donutit" do výsledku, který je v poměru s optimálním výsledkem roven hodnotě $3/2$.
+  Z tohoto výsledku je patrné, že každý on-line algoritmus lze pro vstup tohoto formátu "donutit" do výsledku, který se v poměru s optimálním výsledkem přibližuje libovolně blízko hodnotě $3/2$.
+
+  Proto žádný on-line algoritmus nemůže být lépe než $3/2$-kompetitivní.
 \end{document}

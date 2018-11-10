@@ -30,9 +30,7 @@
   \newpage
   \pagenumbering{arabic}
 
-  \section{P-I-3 Zahrádka}
-
-  \subsection{Řešení pro $n\le100$}
+  \section{Řešení pro $n\le100$}
   Pro každý bod lze projít všechny ostatní body, čímž vyčteme všechny možné dvojice bodů. Pro každou tuto dvojici lze opět vyčíst všechny ostatní body a pro každou takto vzniklou trojici vypočítat obsah trojúhelníku, který tvoří.
 
   Pro každý bod tedy uděláme následující:
@@ -41,7 +39,7 @@
     \item[b)] Pro každou trojici bodů $[x_1,y_1]$, $[x_2,y_2]$ a $[0,0]$ spočítáme obsah jimi tvořeného trojúhelníku jako polovina délky jejich vektorového součinu.
   \end{itemize}
 
-  Vektorový součin je však aplikovatelný pouze na body o třech souřadnicích, proto musíme k bodům přirat třetí souřadnici s nulovou hodnotou:
+  Vektorový součin je však aplikovatelný pouze na body o třech souřadnicích, proto musíme přirat třetí souřadnici s nulovou hodnotou:
 
   $$
   S=\frac{| [x_1,y_1,0]\times[x_2,y_2,0] |}{2}
@@ -51,12 +49,12 @@
 
   Nejmenší z takto vytvořených trojúhelníků je řešením našeho problému. Časová složitost výše popsaného algoritmu je $O(n^3)$, protože procházíme všechny trojice z dané množiny bodů.
 
-  \subsection{Řešení pro $n\le1000$}
-  Problém s algoritmem navrhovaným pro $n\le100$ je ten, že pro každý bod kontrolujeme všechny dvojice tvořeny ostatními body.
+  \section{Řešení pro $n\le1000$}
+  Problém s algoritmem pro $n\le100$ je ten, že pro každý bod kontrolujeme všechny dvojice tvořeny ostatními body.
 
   Z výrazu $\frac{| x_1 \cdot y_2 - y_1 \cdot x_2 |}{2}$ je patrné, že k nalezení trojúhelníku s nejmenším obsahem potřebujeme minimalizovat výraz v absolutní hodnotě.
 
-  Proto místo toho, abychom zkoušeli všechny dvojice, můžeme zkusit pro každý bod setřídit všechny ostatní body porovnáváním $x_1 \cdot y_2 < y_1 \cdot x_2$ (nebo $>$). Poté stačí vypočítat obsahy trojúhelníků tvořenými dvojicemi body, které spolu v setřízeném poli sousedí a bodem $[0,0]$.
+  Místo toho, abychom zkoušeli všechny dvojice, můžeme zkusit pro každý bod setřídit všechny ostatní body porovnáváním $x_1 \cdot y_2 < y_1 \cdot x_2$ (nebo $>$). Poté stačí vypočítat obsahy trojúhelníků tvořenými dvojicemi body, které spolu v setřízeném poli sousedí a bodem $[0,0]$.
 
   Pro každý bod tedy uděláme následující:
   \begin{itemize}
@@ -66,7 +64,7 @@
 
   Nejmenší z takto vytvořených trojúhelníků je řešením našeho problému.
 
-  Je nutno dodat, že je možné, že pro daný bod zvolený v části $(a)$ našeho algoritmu nebude nejmenší jím (a dalšími dvěma body) tvořený trojúhelník nalezen. Tento trojúhelník bude ovšem nalezen při zvolení jednoho z dalších dvou bodů, které nenalezený trojúhelník tvoří.
+  Je nutno dodat, že je možné, že pro daný bod zvolený v části $(a)$ našeho algoritmu nebude nejmenší jím (a dalšími dvěma body) tvořený trojúhelník v části $(b)$ nalezen. Tento trojúhelník bude ovšem nalezen při zvolení jednoho z dalších dvou bodů, které nenalezený trojúhelník tvoří.
 
-  Časová složitost výše popsaného algoritmu je $n^2 \cdot log(n)$, protože pro každý z množiny bodů třídíme (v $O(n \cdot log(n))$) všechny ostatní body.
+  Časová složitost výše popsaného algoritmu je $n^2 \cdot log(n)$, protože pro každý z množiny $n$ bodů třídíme v čase $O(n \cdot log(n))$ všechny ostatní body.
 \end{document}
