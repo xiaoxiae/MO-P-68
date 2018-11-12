@@ -34,7 +34,7 @@
     \item Vstup $v$ jako posloupnost různých hodnot věcí $v=p_1, p_2,...p_n; n \in N$.
     \item Součet hodnot věcí $s=\sum\limits_{i=1}^n p_i$ pro daný vstup o velikosti $n$.
     \item Vstup $v_{opt}$ pro který platí, že OPT$(v_{opt})=s/2$ (tj. vstup produkující optimální výstup\footnote{V rámci našeho problému musí být optimální výstup $s/2$, protože rovnoměrněji než na dvě poloviny nic rozdělit nejde).}).
-    \item Polovina rozdílu velikostí hromádek $r$.
+    \item Polovina absolutní hodnoty rozdílu velikostí hromádek $r$.
   \end{itemize}
 
   \section{Řešení zadání $(a)$}
@@ -58,7 +58,7 @@
   Pro algoritmus OPT s libovolným vstupem $v$ platí:
   \begin{itemize}
     \item OPT$(v) \ge s/2$ (viz. úloha $(a)$).
-    \item OPT$(v) \ge p \; \forall \; p \in v$ (je zřejmé, že OPT nemůže nikdy vyprodukovat nic menšího než hodnotu největšího prvku vstupu).
+    \item OPT$(v) \ge p \; \; \forall \; p \in v$ (je zřejmé, že OPT nemůže nikdy vyprodukovat nic menšího než hodnotu největšího prvku vstupu).
   \end{itemize}
 
   Pro algoritmus ALG s libovolným vstupem $v$ platí:
